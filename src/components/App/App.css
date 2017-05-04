@@ -1,0 +1,41 @@
+.App{
+  max-width: 700px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.App__Title{
+  font-weight: lighter;
+  text-align: center;
+}
+
+.App__Todo--container{
+  border: 1px solid #CCC;
+  margin-bottom: 20px;
+  background-color: #FFF;
+}
+
+.App__Todo__Form{
+  display: flex;
+  flex-direction: column;
+}
+
+.App__Todo__Form--input{
+  width: 100%;
+  max-width: 100%;
+  min-height: 40px;
+  padding: 5px;
+  box-sizing: border-box;
+  border-color: #CCC;
+  background-color: #FFF;
+  font-size: 14px;
+}
+.App__Todo__Form--input:focus{
+  outline: none;
+  box-shadow: inset 1px 0 4px #2aa0c3;
+}
+
+.App__Todo__Form--description{
+  font-size: 10px;
+  color: #CCC;
+}

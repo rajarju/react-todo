@@ -1,0 +1,28 @@
+.TodoItem{
+  border-bottom: 1px solid #CCC;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+}
+.TodoItem:last-child{
+  border-bottom: none;
+}
+
+.TodoItem--text{
+  flex-grow: 99;
+}
+.TodoItem__Actions{
+  flex-grow: 1;
+}
+
+.TodoItem__Actions__Action{
+  margin: 0 2px;
+}
+
+.TodoItem.TodoItem--done .TodoItem--text{
+  text-decoration: line-through;
+}
+
+.container-shadow{
+  box-shadow: 0 1px 4px #999;
+}
