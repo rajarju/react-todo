@@ -5,18 +5,35 @@ class TodoList extends React.Component {
 
   constructor() {
     super();
-    this.state = { items: [
-      { id:0, value : 'Todo 1', done: true},
-      { id:1, value : 'Todo 2', done: false},
-      { id:2, value : 'Todo 3', done: false},
-    ] }
+    this.state = {
+      items: [],
+      isLoading: false,
+      hasErrored: false
+    };
+  }
+
+  fetchData(url) {
+    this.setState({ isLoading: true })
+
+    fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      this.setState({ isLoading: false });
+      return response;
+    })
+    .then((response) => response.json())
+    .then((items) => this.setState({items}))
+    .catch(() => this.setState({ hasErrored : true}));
   }
 
   componentDidMount() {
-    let items = this.state.items;
-    this.setState({
-      items : this.sortItems(items)
-    });
+    this.fetchData('https://5954e3922374e400111e4785.mockapi.io/todo')
+    // let items = this.state.items;
+    // this.setState({
+    //   items : this.sortItems(items)
+    // });
   }
 
   sortItems(items) {
@@ -52,6 +69,14 @@ class TodoList extends React.Component {
 
   render() {
     var items = this.state.items;
+    if (this.state.hasErrored) {
+      return <p> There was an Error! </p>;
+    }
+
+    if (this.state.isLoading) {
+      return <p> Loading </p>;
+    }
+
     return (
       <div>
         <div className="App__Todo--container container-shadow">
