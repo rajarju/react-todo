@@ -1,39 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { itemsFetchData } from '../../actions/TodoList/TodoList.js';
+
 import TodoItem from '../TodoItem/TodoItem';
 
 class TodoList extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      items: [],
-      isLoading: false,
-      hasErrored: false
-    };
-  }
-
-  fetchData(url) {
-    this.setState({ isLoading: true })
-
-    fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      this.setState({ isLoading: false });
-      return response;
-    })
-    .then((response) => response.json())
-    .then((items) => this.setState({items}))
-    .catch(() => this.setState({ hasErrored : true}));
-  }
-
   componentDidMount() {
-    this.fetchData('https://5954e3922374e400111e4785.mockapi.io/todo')
-    // let items = this.state.items;
-    // this.setState({
-    //   items : this.sortItems(items)
-    // });
+    this.props.fetchData('https://5954e3922374e400111e4785.mockapi.io/todo')
   }
 
   sortItems(items) {
@@ -68,12 +42,12 @@ class TodoList extends React.Component {
   }
 
   render() {
-    var items = this.state.items;
-    if (this.state.hasErrored) {
+    var items = this.props.items;
+    if (this.props.hasErrored) {
       return <p> There was an Error! </p>;
     }
 
-    if (this.state.isLoading) {
+    if (this.props.isLoading) {
       return <p> Loading </p>;
     }
 
@@ -95,4 +69,20 @@ class TodoList extends React.Component {
   }
 }
 
-export default TodoList;
+ const mapStateToProps = (state) => {
+   return {
+     items : state.items,
+     hasErrored: state.hasErrored,
+     isLoading: state.isLoading
+   }
+ };
+
+
+ const mapDispatchToProps = (dispatch) => {
+   return {
+     fetchData: (url) => dispatch(itemsFetchData(url))
+   };
+ };
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

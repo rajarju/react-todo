@@ -16,8 +16,7 @@ class App extends React.Component {
             <Route path="/todo/:itemId" render={ ( {match} ) => (
               <TodoItemPage match={match} />
             ) }>
-              
-            </Route>          
+            </Route>
           </div>
       </Router>
     );
