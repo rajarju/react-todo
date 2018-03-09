@@ -9,7 +9,7 @@ install:
   - "npm install"
   
 script:
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/build_pull_request.sh; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/build-pull-request.sh; fi'
   - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then npm run test fi'
   
   
