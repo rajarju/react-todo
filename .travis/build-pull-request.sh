@@ -1,1 +1,1 @@
-echo "Buildig Pull request"
+echo "Building Pull request"
